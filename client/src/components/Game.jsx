@@ -54,7 +54,7 @@ const Game = ({ user, onLogout }) => {
     (count) => {
       if (typeof count !== "number") return;
 
-      setEnemiesLeft(count);
+      // setEnemiesLeft(count);
 
       if (currentLevel === 3) {
         return;
@@ -158,7 +158,7 @@ const Game = ({ user, onLogout }) => {
   useEffect(() => {
     const fetchScoresData = async () => {
       try {
-        setScoresLoading(true);
+        // setScoresLoading(true);
         let token = null;
         if (auth.currentUser) {
           token = await auth.currentUser.getIdToken();
@@ -169,7 +169,7 @@ const Game = ({ user, onLogout }) => {
         console.error("Error fetching scores:", error);
         setScores([]);
       } finally {
-        setScoresLoading(false);
+        // setScoresLoading(false);
       }
     };
 
