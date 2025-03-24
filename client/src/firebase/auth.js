@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -9,7 +8,6 @@ import {
 import { firebaseConfig } from './firebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-
 
 let app;
 let auth;
