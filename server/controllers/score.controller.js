@@ -9,14 +9,12 @@ export const createScore = async (req, res) => {
             return res.status(400).json({ message: 'Please fill all required fields' });
         }
 
-
         const scoreData = {
             playerName,
             score,
             level,
             defeatedBoss
         };
-
 
         if (req.user && req.user.uid) {
             scoreData.userId = req.user.uid;
@@ -26,10 +24,8 @@ export const createScore = async (req, res) => {
             scoreData.userId = userId;
         }
 
-
         if (scoreData.userId) {
             console.log(`Checking existing scores for user ${scoreData.userId} before saving`);
-
 
             const existingScores = await Score.find({ userId: scoreData.userId }).sort({ score: -1 });
 
@@ -71,12 +67,10 @@ export const createScore = async (req, res) => {
         const newScore = await Score.create(scoreData);
         console.log(`New score saved: ${newScore._id}`);
 
-
         if (scoreData.userId) {
             const allUserScores = await Score.find({ userId: scoreData.userId }).sort({ createdAt: -1 });
             if (allUserScores.length > 1) {
                 console.log(`Found ${allUserScores.length} scores for user after save, cleaning up duplicates`);
-
 
                 const latestScore = allUserScores[0];
                 const scoresToDelete = allUserScores
@@ -87,8 +81,6 @@ export const createScore = async (req, res) => {
                     console.log(`Deleting ${scoresToDelete.length} duplicate scores`);
                     await Score.deleteMany({ _id: { $in: scoresToDelete } });
                 }
-
-
                 return res.status(201).json(latestScore);
             }
         }
@@ -124,15 +116,12 @@ export const getUserScores = async (req, res) => {
     try {
         let userId = req.params.userId;
 
-
         if (!userId && req.user && req.user.uid) {
             userId = req.user.uid;
         }
-
         if (!userId) {
             return res.status(400).json({ message: 'User ID is required' });
         }
-
 
         if (req.user && req.user.uid !== userId) {
 
@@ -165,7 +154,6 @@ export const deleteUserScores = async (req, res) => {
             console.warn(`User ${req.user.uid} is trying to delete scores of user ${userId}`);
             // return res.status(403).json({ message: 'Unauthorized to delete these scores' });
         }
-
         const result = await Score.deleteMany({ userId });
 
         if (result.deletedCount === 0) {
