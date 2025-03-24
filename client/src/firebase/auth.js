@@ -10,12 +10,11 @@ import { firebaseConfig } from './firebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
-// Global variables
+
 let app;
 let auth;
 let analytics = null;
 
-// Initialize Firebase
 try {
     console.log("Initializing Firebase with config:", JSON.stringify(firebaseConfig));
     app = initializeApp(firebaseConfig);
@@ -24,7 +23,6 @@ try {
     auth = getAuth(app);
     console.log("Firebase Auth initialized successfully");
 
-    // Analytics might not be available in all environments
     if (typeof window !== 'undefined') {
         try {
             analytics = getAnalytics(app);
