@@ -12,7 +12,6 @@ import { auth } from "../firebase/auth";
 const Game = ({ user, onLogout }) => {
   const [gameState, setGameState] = useState(GAME_STATES.START);
   const [score, setScore] = useState(0);
-  const [enemiesLeft, setEnemiesLeft] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [bossHealth, setBossHealth] = useState(0);
   const [bossDefeated, setBossDefeated] = useState(false);
@@ -52,8 +51,6 @@ const Game = ({ user, onLogout }) => {
   const updateEnemiesLeft = useCallback(
     (count) => {
       if (typeof count !== "number") return;
-
-      // setEnemiesLeft(count);
 
       if (currentLevel === 3) {
         return;
