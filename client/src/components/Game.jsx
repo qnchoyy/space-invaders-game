@@ -19,7 +19,6 @@ const Game = ({ user, onLogout }) => {
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [scores, setScores] = useState([]);
-  const [scoresLoading, setScoresLoading] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -158,7 +157,6 @@ const Game = ({ user, onLogout }) => {
   useEffect(() => {
     const fetchScoresData = async () => {
       try {
-        // setScoresLoading(true);
         let token = null;
         if (auth.currentUser) {
           token = await auth.currentUser.getIdToken();
@@ -168,8 +166,6 @@ const Game = ({ user, onLogout }) => {
       } catch (error) {
         console.error("Error fetching scores:", error);
         setScores([]);
-      } finally {
-        // setScoresLoading(false);
       }
     };
 
